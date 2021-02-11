@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+const electron = window.require('electron');
+const {shell} = window.require('electron');
+const remote = electron.remote
+const {dialog} = remote
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = ()=>{
+    return(
+        
+      <button onClick={()=>{
+          dialog.showOpenDialog(
+              {
+                title:'Open Dialogue',
+                message:'First Dialog',
+                //pass 'openDirectory' to strictly open directories
+                properties: ['openFile']
+              }
+          ).then(result=>{
+            shell.openPath(result.filePaths[0])
+            console.log(result.filePaths[0]);
+            })
+        }}>
+          Open Dialog to Select a file
+         </button>
+
+    )
+
+
 }
 
-export default App;
+
+export default App
