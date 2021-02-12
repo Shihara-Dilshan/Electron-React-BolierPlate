@@ -5,6 +5,9 @@ import './App.css';
 
 
 const SecondPage = () => {
+    
+
+
     return(
     	<h3>This is second page <Link to="/"><button>fdf</button></Link></h3>
     );
