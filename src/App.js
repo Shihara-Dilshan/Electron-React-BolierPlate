@@ -1,32 +1,37 @@
-import React from 'react';
-const electron = window.require('electron');
-const {shell} = window.require('electron');
-const remote = electron.remote
-const {dialog} = remote
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
-const App = ()=>{
+import logo from './logo.svg';
+import './App.css';
+
+
+const SecondPage = () => {
     return(
-        
-      <button onClick={()=>{
-          dialog.showOpenDialog(
-              {
-                title:'Open Dialogue',
-                message:'First Dialog',
-                //pass 'openDirectory' to strictly open directories
-                properties: ['openFile']
-              }
-          ).then(result=>{
-            shell.openPath(result.filePaths[0])
-            console.log(result.filePaths[0]);
-            })
-        }}>
-          Open Dialog to Select a file
-         </button>
-
-    )
-
-
+    	<h3>This is second page <Link to="/"><button>fdf</button></Link></h3>
+    );
 }
 
+const FirstPage = () => {
+    return(
+    	<h3>This is 1 page <Link to="/secondpage"><button>fdf</button></Link></h3>
+    );
+}
 
-export default App
+function App() {
+  return (
+    <Router>
+      <div >
+        {/*<Route path="/" exec component={Nevbar} />*/}
+        {/*Include your Nevbar here*/}
+        <Switch>
+          <Route path="/" exact component={FirstPage} />
+          <Route path="/secondpage" exact component={SecondPage} />
+          
+        </Switch>
+         {/*<Route path="/" exec component={Footer} />*/}
+         {/*Include your Footer here*/}
+      </div>
+    </Router>
+  );
+}
+
+export default App;
